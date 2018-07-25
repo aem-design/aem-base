@@ -33,7 +33,6 @@ RUN     \
             libXinerama.x86_64 libXinerama.i686 \
             ld-linux.so.2 \
             ImageMagick ImageMagick-devel && \
-
 ## clenaup
         yum clean all && rm -rf /var/lib/yum/*
 
