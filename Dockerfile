@@ -5,8 +5,7 @@ MAINTAINER  devops <devops@aem.design>
 LABEL   container.version="1.0" \
         os.version="centos 7" \
         java.version="oracle 8" \
-        container.description="base image for aem" \
-        image.source="https://github.com/jrottenberg/ffmpeg/tree/master/docker-images"
+        container.description="base image for aem with installed dependecies"
 
 RUN     \
         yum install -y --enablerepo=extras epel-release && \
