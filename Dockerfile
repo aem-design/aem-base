@@ -2,10 +2,13 @@ FROM        aemdesign/java-ffmpeg:latest
 
 MAINTAINER  devops <devops@aem.design>
 
-LABEL   container.version="1.0" \
-        os.version="centos 7" \
-        java.version="oracle 8" \
-        container.description="base image for aem with installed dependecies"
+LABEL   os="centos" \
+        java="oracle 8" \
+        container.description="base image for aem with installed dependecies" \
+        version="1.0.0" \
+        imagename="aem-base" \
+        test.command=" java -version 2>&1 | grep 'java version' | sed -e 's/.*java version "\(.*\)".*/\1/'" \
+        test.command.verify="1.8"
 
 RUN     \
         yum install -y --enablerepo=extras epel-release && \
