@@ -13,8 +13,7 @@ RUN     \
         yum install -y --enablerepo=extras epel-release && \
         yum install -y \
             curl-devel \
-            openssl.x86_64 openssl.i686 openssl-devel \
-            cjkuni-ukai-fonts.noarch cjkuni-uming-fonts.noarch \
+            openssl.x86_64 openssl-devel \
             nss-softokn-freebl.x86_64 nss-softokn-freebl.i686 \
             glibc.x86_64 glibc.i686 \
             libX11.x86_64 libX11.i686 \
@@ -34,6 +33,7 @@ RUN     \
             libXinerama.x86_64 libXinerama.i686 \
             ld-linux.so.2 \
             ImageMagick ImageMagick-devel && \
+        yum groupinstall -y Fonts && \
 ## clenaup
         yum clean all && rm -rf /var/lib/yum/*
 
