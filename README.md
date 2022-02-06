@@ -1,6 +1,6 @@
-## CentOS 7 with AEM
+## Debian with AEM
 
-[![build_status](https://travis-ci.org/aem-design/docker-aem-base.svg?branch=master)](https://travis-ci.org/aem-design/docker-aem-base) 
+[![build](https://github.com/aem-design/docker-aem-base/actions/workflows/build.yml/badge.svg?branch=jdk8)](https://github.com/aem-design/docker-aem-base/actions/workflows/build.yml)
 [![github license](https://img.shields.io/github/license/aem-design/aem-base)](https://github.com/aem-design/aem-base) 
 [![github issues](https://img.shields.io/github/issues/aem-design/aem-base)](https://github.com/aem-design/aem-base) 
 [![github last commit](https://img.shields.io/github/last-commit/aem-design/aem-base)](https://github.com/aem-design/aem-base) 
