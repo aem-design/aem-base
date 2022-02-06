@@ -6,7 +6,7 @@
 # IMAGE_NAME specifies a name of the candidate image used for testing.
 # The image has to be available before this script is executed.
 #
-IMAGE_NAME=${1:-aemdesign/java-ffmpeg:jdk8}
+IMAGE_NAME=${1:-aemdesign/aem-base:jdk8}
 FLAG_DEBUG=${2:-true}
 IP=$(which ip)
 if [[ -z $IP ]]; then
@@ -95,11 +95,12 @@ printDebug() {
 
 test_usage_java() {
   printLine "Testing java"
-  CHECK="$(cat ../Dockerfile | grep -m1 java.version | sed -e 's/.*java.version="\(.*\)".*/\1/g')"
+  CHECK="$(cat ../Dockerfile | grep -m1 test.command.verify | sed -e 's/.*test.command.verify="\(.*\)".*/\1/g')"
+  CHECK_COMMAND="$(cat ../Dockerfile | grep -m1 test.command | sed -e 's/.*test.command="\(.*\)".*/\1/g')"
 
   printLine "Starting Container"
 
-  OUTPUT=$(docker run --rm ${IMAGE_NAME} bash -c "java -version 2>&1 | grep 'java version' | sed -e 's/.*java version \"\(.*\)\".*/\1/'")
+  OUTPUT=$(docker run --rm ${IMAGE_NAME} bash -c "${CHECK_COMMAND}")
 
   if [[ "$OUTPUT" != *"$CHECK"* ]]; then
       printResult "error"

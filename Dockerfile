@@ -2,11 +2,12 @@ FROM        aemdesign/java-ffmpeg:jdk8
 
 LABEL   os="debian" \
         java="oracle 8" \
-        java.version="1.8" \
         maintainer="devops <devops@aem.design>" \
-        container.description="base image for aem with installed dependecies" \
+        container.description="base image for aem with installed dependencies" \
         version="1.1.0" \
-        imagename="aem-base"
+        imagename="aem-base" \
+        test.command=" java -version 2>&1 | grep 'java version' | sed -e 's/.*java version "\(.*\)".*/\1/'" \
+        test.command.verify="1.8"
 
 RUN     \
         echo ">>> SETUP: enable multiarch <<" && \
