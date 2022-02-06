@@ -6,7 +6,7 @@
 # IMAGE_NAME specifies a name of the candidate image used for testing.
 # The image has to be available before this script is executed.
 #
-IMAGE_NAME=${1:-aemdesign/aem-base}
+IMAGE_NAME=${1:-aemdesign/aem-base:jdk11}
 FLAG_DEBUG=${2:-true}
 IP=$(which ip)
 if [[ -z $IP ]]; then
@@ -95,7 +95,7 @@ printDebug() {
 
 test_usage_java() {
   printLine "Testing java"
-  CHECK="11."
+  CHECK="$(cat ../Dockerfile | grep -m1 java.version | sed -e 's/.*java.version="\(.*\)".*/\1/g')"
 
   printLine "Starting Container"
 
@@ -106,9 +106,27 @@ test_usage_java() {
       printDebug "Image '${IMAGE_NAME}' test FAILED could not find ${CHECK} in output" "${OUTPUT}"
       exit 1
     else
-        printResult "success"
+      printResult "success"
   fi
 }
 
+test_usage_ffmpeg() {
+  printLine "Testing ffmpeg"
+  CHECK="$(cat ../Dockerfile | grep -m1 FFMPEG_VERSION | sed -e 's/.*FFMPEG_VERSION="\(.*\)".*/\1/g')"
+
+  printLine "Starting Container"
+
+  OUTPUT=$(docker run --rm ${IMAGE_NAME} ffmpeg -version)
+
+  if [[ "$OUTPUT" != *"$CHECK"* ]]; then
+      printResult "error"
+      printDebug "Image '${IMAGE_NAME}' test FAILED could not find ${CHECK} in output" "${OUTPUT}"
+      exit 1
+    else
+      printResult "success"
+  fi
+}
 
 test_usage_java
+
+test_usage_ffmpeg
