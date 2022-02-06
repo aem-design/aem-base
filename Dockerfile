@@ -46,3 +46,4 @@ RUN     \
         echo ">>> CLEANUP <<" && \
           apt-get clean
 
+ENV FONTCONFIG_PATH=/etc/fonts
